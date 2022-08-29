@@ -30,9 +30,8 @@ namespace BA_Project
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                GenericFunctions.ClearControls(this.Controls);
             }
-
-            GenericFunctions.ClearControls(this.Controls);
         }
 
         private void btnNavigateToLogin_Click(object sender, EventArgs e)
