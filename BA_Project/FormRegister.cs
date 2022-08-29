@@ -31,6 +31,7 @@ namespace BA_Project
             {
                 MessageBox.Show(ex.Message);
                 GenericFunctions.ClearControls(this.Controls);
+
             }
         }
 
