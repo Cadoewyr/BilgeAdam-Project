@@ -29,9 +29,8 @@ namespace BA_Project
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
                 GenericFunctions.ClearControls(this.Controls);
-
+                MessageBox.Show(ex.Message);
             }
         }
 
