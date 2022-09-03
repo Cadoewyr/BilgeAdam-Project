@@ -24,9 +24,9 @@ namespace BA_Project.Business.Managers
             return DB.Instance.Settings.Any(predicate);
         }
 
-        public UserSettings Get(Expression<Func<UserSettings, bool>> predicate)
+        public List<UserSettings> Get(Expression<Func<UserSettings, bool>> predicate)
         {
-            return DB.Instance.Settings.Where(predicate).FirstOrDefault();
+            return DB.Instance.Settings.Where(predicate).ToList();
         }
 
         public List<UserSettings> GetAll()
@@ -39,13 +39,13 @@ namespace BA_Project.Business.Managers
             DB.Instance.Settings.Remove(entity);
         }
 
-        public void Update(UserSettings entity)
+        public void Update(UserSettings oldEntity, UserSettings newEntity)
         {
-            var temp = DB.Instance.Settings.Find(entity.ID);
+            var temp = DB.Instance.Settings.Find(oldEntity.ID);
 
             if (temp != null)
             {
-                temp = entity;
+                temp.RememberMe = newEntity.RememberMe;
                 DB.Instance.SaveChanges();
             }
             else

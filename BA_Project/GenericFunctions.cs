@@ -38,6 +38,9 @@ namespace BA_Project
 
                 else if (control is ListView)
                     (control as ListView).Items.Clear();
+
+                else if (control is DataGridView)
+                    (control as DataGridView).Rows.Clear();
             }
         }
         public static void ClearControls(ControlCollection controls)
@@ -64,6 +67,38 @@ namespace BA_Project
 
                 else if (control is ListView)
                     (control as ListView).Items.Clear();
+
+                else if (control is DataGridView)
+                    (control as DataGridView).Rows.Clear();
+            }
+        }
+        public static void ClearControls(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                if (control is TextBox)
+                    (control as TextBox).Clear();
+
+                else if (control is MaskedTextBox)
+                    (control as MaskedTextBox).Clear();
+
+                else if (control is RichTextBox)
+                    (control as RichTextBox).Clear();
+
+                else if (control is ListBox)
+                    (control as ListBox).Items.Clear();
+
+                else if (control is ComboBox)
+                    (control as ComboBox).Items.Clear();
+
+                else if (control is CheckedListBox)
+                    (control as CheckedListBox).Items.Clear();
+
+                else if (control is ListView)
+                    (control as ListView).Items.Clear();
+
+                else if (control is DataGridView)
+                    (control as DataGridView).Rows.Clear();
             }
         }
     }

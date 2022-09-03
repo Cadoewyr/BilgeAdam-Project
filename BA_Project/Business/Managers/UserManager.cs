@@ -43,14 +43,38 @@ namespace BA_Project.Business.Managers
             }
         }
 
-        public List<User> GetAll()
+        public void Update(User oldEntity, User newEntity)
         {
-            return DB.Instance.Users.ToList();
-        }
+            var result = new UserValidator().Validate(newEntity);
 
-        public User Get(Expression<Func<User, bool>> predicate)
-        {
-            return DB.Instance.Users.Where(predicate).FirstOrDefault();
+            if (result.IsValid)
+            {
+                var temp = DB.Instance.Users.Find(oldEntity.ID);
+
+                if (temp != null)
+                {
+                    temp.Records = newEntity.Records;
+                    temp.Settings = newEntity.Settings;
+                    temp.Username = newEntity.Username;
+                    temp.Password = newEntity.Password;
+
+                    DB.Instance.SaveChanges();
+                }
+                else
+                    throw new NullReferenceException("There is no any record.");
+            }
+            else
+            {
+                StringBuilder SB = new StringBuilder();
+
+                foreach (var error in result.Errors)
+                {
+                    SB.Append(error.ErrorMessage).AppendLine();
+                }
+
+                throw new Exception(SB.ToString());
+            }
+            
         }
 
         public void Remove(User entity)
@@ -59,17 +83,14 @@ namespace BA_Project.Business.Managers
             DB.Instance.SaveChanges();
         }
 
-        public void Update(User entity)
+        public List<User> GetAll()
         {
-            var temp = DB.Instance.Users.Find(entity.ID);
+            return DB.Instance.Users.ToList();
+        }
 
-            if (temp != null)
-            {
-                temp = entity;
-                DB.Instance.SaveChanges();
-            }
-            else
-                throw new NullReferenceException("There is no any user record.");
+        public List<User> Get(Expression<Func<User, bool>> predicate)
+        {
+            return DB.Instance.Users.Where(predicate).ToList();
         }
 
         public bool Exists(Expression<Func<User, bool>> predicate)

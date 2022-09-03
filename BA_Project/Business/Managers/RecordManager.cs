@@ -33,14 +33,37 @@ namespace BA_Project.Business.Managers
 
         }
 
-        public List<Record> GetAll()
+        public void Update(Record oldEntity, Record newEntity)
         {
-            return DB.Instance.Records.ToList();
-        }
+            var result = new RecordValidator().Validate(newEntity);
 
-        public Record Get(Expression<Func<Record, bool>> predicate)
-        {
-            return DB.Instance.Records.Where(predicate).FirstOrDefault();
+            if (result.IsValid)
+            {
+                var temp = DB.Instance.Records.Find(oldEntity.ID);
+
+                if (temp != null)
+                {
+                    temp.RecordName = newEntity.RecordName;
+                    temp.URL = newEntity.URL;
+                    temp.Mail = newEntity.Mail;
+                    temp.Password = newEntity.Password;
+                    
+                    DB.Instance.SaveChanges();
+                }
+                else
+                    throw new NullReferenceException("There is no any record.");
+            }
+            else
+            {
+                StringBuilder SB = new StringBuilder();
+
+                foreach (var error in result.Errors)
+                {
+                    SB.Append(error.ErrorMessage).AppendLine();
+                }
+
+                throw new Exception(SB.ToString());
+            }
         }
 
         public void Remove(Record entity)
@@ -48,17 +71,14 @@ namespace BA_Project.Business.Managers
             DB.Instance.Records.Remove(entity);
         }
 
-        public void Update(Record entity)
+        public List<Record> GetAll()
         {
-            var temp = DB.Instance.Records.Find(entity.ID);
+            return DB.Instance.Records.ToList();
+        }
 
-            if (temp != null)
-            {
-                temp = entity;
-                DB.Instance.SaveChanges();
-            }
-            else
-                throw new NullReferenceException("There is no any account record.");
+        public List<Record> Get(Expression<Func<Record, bool>> predicate)
+        {
+            return DB.Instance.Records.Where(predicate).ToList();
         }
 
         public bool Exists(Expression<Func<Record, bool>> predicate)

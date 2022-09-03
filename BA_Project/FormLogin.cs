@@ -18,7 +18,7 @@ namespace BA_Project
             if (userManager.Exists(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)))
             {
                 var form = (FormMain)FormManager<FormMain>.CreateForm();
-                form.SetCurrentUser(userManager.Get(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)));
+                form.SetCurrentUser(userManager.Get(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)).FirstOrDefault());
                 form.Show();
                 this.Close();
             }
