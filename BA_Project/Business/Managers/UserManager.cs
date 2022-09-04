@@ -42,7 +42,6 @@ namespace BA_Project.Business.Managers
                 throw new Exception(SB.ToString());
             }
         }
-
         public void Update(User oldEntity, User newEntity)
         {
             var result = new UserValidator().Validate(newEntity);
@@ -76,23 +75,18 @@ namespace BA_Project.Business.Managers
             }
             
         }
-
         public void Remove(User entity)
         {
             DB.Instance.Users.Remove(entity);
             DB.Instance.SaveChanges();
         }
-
-        public List<User> GetAll()
+        public List<User> Get(Expression<Func<User, bool>>? predicate)
         {
-            return DB.Instance.Users.ToList();
+            if (predicate != null)
+                return DB.Instance.Users.Where(predicate).ToList();
+            else
+                return DB.Instance.Users.ToList();
         }
-
-        public List<User> Get(Expression<Func<User, bool>> predicate)
-        {
-            return DB.Instance.Users.Where(predicate).ToList();
-        }
-
         public bool Exists(Expression<Func<User, bool>> predicate)
         {
             return DB.Instance.Users.Any(predicate);

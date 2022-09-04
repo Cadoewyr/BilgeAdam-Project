@@ -2,7 +2,6 @@
 using BA_Project.DAL.Context;
 using BA_Project.DAL.Entities;
 using BA_Project.Validation;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -32,7 +31,6 @@ namespace BA_Project.Business.Managers
             }
 
         }
-
         public void Update(Record oldEntity, Record newEntity)
         {
             var result = new RecordValidator().Validate(newEntity);
@@ -47,7 +45,7 @@ namespace BA_Project.Business.Managers
                     temp.URL = newEntity.URL;
                     temp.Mail = newEntity.Mail;
                     temp.Password = newEntity.Password;
-                    
+
                     DB.Instance.SaveChanges();
                 }
                 else
@@ -65,22 +63,18 @@ namespace BA_Project.Business.Managers
                 throw new Exception(SB.ToString());
             }
         }
-
         public void Remove(Record entity)
         {
             DB.Instance.Records.Remove(entity);
+            DB.Instance.SaveChanges();
         }
-
-        public List<Record> GetAll()
+        public List<Record> Get(Expression<Func<Record, bool>>? predicate)
         {
-            return DB.Instance.Records.ToList();
+            if (predicate != null)
+                return DB.Instance.Records.Where(predicate).ToList();
+            else
+                return DB.Instance.Records.ToList();
         }
-
-        public List<Record> Get(Expression<Func<Record, bool>> predicate)
-        {
-            return DB.Instance.Records.Where(predicate).ToList();
-        }
-
         public bool Exists(Expression<Func<Record, bool>> predicate)
         {
             return DB.Instance.Records.Any(predicate);

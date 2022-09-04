@@ -41,6 +41,9 @@ namespace BA_Project
             {
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
+
+            if (dataGridRecords.Rows.Count > 0)
+                dataGridRecords.Sort(dataGridRecords.Columns["RecordName"], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -48,7 +51,7 @@ namespace BA_Project
             this.Text += $" | {CurrentUser.Username}";
             rm = new RecordManager();
 
-            this.dataGridRecords.CellValueChanged += (object? sender, DataGridViewCellEventArgs e) =>
+            dataGridRecords.CellValueChanged += (object? sender, DataGridViewCellEventArgs e) =>
             {
                 var dgv = sender as DataGridView;
                 Record oldRec = dgv.Rows[dgv.CurrentCell.RowIndex].Tag as Record;
@@ -73,6 +76,27 @@ namespace BA_Project
                 finally
                 {
                     FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == CurrentUser.ID));
+                }
+            };
+            dataGridRecords.KeyDown += (object? sender, KeyEventArgs e) =>
+            {
+                try
+                {
+                    if (e.KeyCode == Keys.Delete & (sender as DataGridView).SelectedCells.Count > 0)
+                    {
+                        var dgv = (sender as DataGridView);
+
+                        Record temp = dgv.Rows[dgv.SelectedCells[0].RowIndex].Tag as Record;
+                        rm.Remove(temp);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    FillDataGridView(this.dataGridRecords, rm.Get(r => r.User.ID == CurrentUser.ID));
                 }
             };
 
@@ -102,8 +126,28 @@ namespace BA_Project
             finally
             {
                 FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == CurrentUser.ID));
-                GenericFunctions.ClearControls(gpEdit.Controls);
+                GenericFunctions.ClearControls(gpAdd.Controls);
             }
+        }
+
+        private void btnGeneratePassword_Click(object sender, EventArgs e)
+        {
+            int c = 0;
+
+            if (cbSymbols.Checked)
+                c += (int)GenericFunctions.PasswordGeneratingOptions.CharactersAndSymbols;
+            if (cbNumbers.Checked)
+                c += (int)GenericFunctions.PasswordGeneratingOptions.CharactersAndNumbers;
+
+            GenericFunctions.PasswordGeneratingOptions option = (GenericFunctions.PasswordGeneratingOptions)c;
+
+            txtGeneratedPassword.Text = GenericFunctions.GeneratePassword(option, Convert.ToInt32(nudPasswordLength.Value));
+        }
+
+        private void btnCopyToClipboard_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtGeneratedPassword.Text))
+                Clipboard.SetText(txtGeneratedPassword.Text);
         }
     }
 }

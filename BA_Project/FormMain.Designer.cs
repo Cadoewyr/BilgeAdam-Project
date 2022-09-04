@@ -34,7 +34,7 @@
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gpEdit = new System.Windows.Forms.GroupBox();
+            this.gpAdd = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
@@ -45,9 +45,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridRecords = new System.Windows.Forms.DataGridView();
+            this.gpPasswordGenerator = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbNumbers = new System.Windows.Forms.CheckBox();
+            this.cbSymbols = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nudPasswordLength = new System.Windows.Forms.NumericUpDown();
+            this.btnGeneratePassword = new System.Windows.Forms.Button();
+            this.txtGeneratedPassword = new System.Windows.Forms.TextBox();
+            this.btnCopyToClipboard = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
-            this.gpEdit.SuspendLayout();
+            this.gpAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRecords)).BeginInit();
+            this.gpPasswordGenerator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPasswordLength)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -96,23 +107,23 @@
             this.passwordGeneratorToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.passwordGeneratorToolStripMenuItem.Text = "Password Generator";
             // 
-            // gpEdit
+            // gpAdd
             // 
-            this.gpEdit.Controls.Add(this.btnAdd);
-            this.gpEdit.Controls.Add(this.txtPassword);
-            this.gpEdit.Controls.Add(this.txtMail);
-            this.gpEdit.Controls.Add(this.txtURL);
-            this.gpEdit.Controls.Add(this.txtRecordName);
-            this.gpEdit.Controls.Add(this.label4);
-            this.gpEdit.Controls.Add(this.label3);
-            this.gpEdit.Controls.Add(this.label2);
-            this.gpEdit.Controls.Add(this.label1);
-            this.gpEdit.Location = new System.Drawing.Point(718, 27);
-            this.gpEdit.Name = "gpEdit";
-            this.gpEdit.Size = new System.Drawing.Size(250, 191);
-            this.gpEdit.TabIndex = 2;
-            this.gpEdit.TabStop = false;
-            this.gpEdit.Text = "Edit Record";
+            this.gpAdd.Controls.Add(this.btnAdd);
+            this.gpAdd.Controls.Add(this.txtPassword);
+            this.gpAdd.Controls.Add(this.txtMail);
+            this.gpAdd.Controls.Add(this.txtURL);
+            this.gpAdd.Controls.Add(this.txtRecordName);
+            this.gpAdd.Controls.Add(this.label4);
+            this.gpAdd.Controls.Add(this.label3);
+            this.gpAdd.Controls.Add(this.label2);
+            this.gpAdd.Controls.Add(this.label1);
+            this.gpAdd.Location = new System.Drawing.Point(718, 27);
+            this.gpAdd.Name = "gpAdd";
+            this.gpAdd.Size = new System.Drawing.Size(250, 191);
+            this.gpAdd.TabIndex = 2;
+            this.gpAdd.TabStop = false;
+            this.gpAdd.Text = "Add Record";
             // 
             // btnAdd
             // 
@@ -197,27 +208,132 @@
             this.dataGridRecords.MultiSelect = false;
             this.dataGridRecords.Name = "dataGridRecords";
             this.dataGridRecords.RowTemplate.Height = 25;
-            this.dataGridRecords.Size = new System.Drawing.Size(700, 341);
+            this.dataGridRecords.Size = new System.Drawing.Size(700, 410);
             this.dataGridRecords.TabIndex = 4;
+            // 
+            // gpPasswordGenerator
+            // 
+            this.gpPasswordGenerator.Controls.Add(this.label6);
+            this.gpPasswordGenerator.Controls.Add(this.cbNumbers);
+            this.gpPasswordGenerator.Controls.Add(this.cbSymbols);
+            this.gpPasswordGenerator.Controls.Add(this.label5);
+            this.gpPasswordGenerator.Controls.Add(this.nudPasswordLength);
+            this.gpPasswordGenerator.Controls.Add(this.btnCopyToClipboard);
+            this.gpPasswordGenerator.Controls.Add(this.btnGeneratePassword);
+            this.gpPasswordGenerator.Controls.Add(this.txtGeneratedPassword);
+            this.gpPasswordGenerator.Location = new System.Drawing.Point(718, 224);
+            this.gpPasswordGenerator.Name = "gpPasswordGenerator";
+            this.gpPasswordGenerator.Size = new System.Drawing.Size(250, 213);
+            this.gpPasswordGenerator.TabIndex = 5;
+            this.gpPasswordGenerator.TabStop = false;
+            this.gpPasswordGenerator.Text = "Password Generator";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 15);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Include";
+            // 
+            // cbNumbers
+            // 
+            this.cbNumbers.AutoSize = true;
+            this.cbNumbers.Location = new System.Drawing.Point(70, 33);
+            this.cbNumbers.Name = "cbNumbers";
+            this.cbNumbers.Size = new System.Drawing.Size(75, 19);
+            this.cbNumbers.TabIndex = 6;
+            this.cbNumbers.Text = "Numbers";
+            this.cbNumbers.UseVisualStyleBackColor = true;
+            // 
+            // cbSymbols
+            // 
+            this.cbSymbols.AutoSize = true;
+            this.cbSymbols.Location = new System.Drawing.Point(151, 33);
+            this.cbSymbols.Name = "cbSymbols";
+            this.cbSymbols.Size = new System.Drawing.Size(71, 19);
+            this.cbSymbols.TabIndex = 6;
+            this.cbSymbols.Text = "Symbols";
+            this.cbSymbols.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Password Length";
+            // 
+            // nudPasswordLength
+            // 
+            this.nudPasswordLength.Location = new System.Drawing.Point(121, 71);
+            this.nudPasswordLength.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudPasswordLength.Name = "nudPasswordLength";
+            this.nudPasswordLength.Size = new System.Drawing.Size(110, 23);
+            this.nudPasswordLength.TabIndex = 2;
+            this.nudPasswordLength.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // btnGeneratePassword
+            // 
+            this.btnGeneratePassword.Location = new System.Drawing.Point(18, 143);
+            this.btnGeneratePassword.Name = "btnGeneratePassword";
+            this.btnGeneratePassword.Size = new System.Drawing.Size(213, 23);
+            this.btnGeneratePassword.TabIndex = 1;
+            this.btnGeneratePassword.Text = "Generate";
+            this.btnGeneratePassword.UseVisualStyleBackColor = true;
+            this.btnGeneratePassword.Click += new System.EventHandler(this.btnGeneratePassword_Click);
+            // 
+            // txtGeneratedPassword
+            // 
+            this.txtGeneratedPassword.Location = new System.Drawing.Point(18, 114);
+            this.txtGeneratedPassword.Name = "txtGeneratedPassword";
+            this.txtGeneratedPassword.ReadOnly = true;
+            this.txtGeneratedPassword.Size = new System.Drawing.Size(213, 23);
+            this.txtGeneratedPassword.TabIndex = 0;
+            // 
+            // btnCopyToClipboard
+            // 
+            this.btnCopyToClipboard.Location = new System.Drawing.Point(18, 172);
+            this.btnCopyToClipboard.Name = "btnCopyToClipboard";
+            this.btnCopyToClipboard.Size = new System.Drawing.Size(213, 23);
+            this.btnCopyToClipboard.TabIndex = 1;
+            this.btnCopyToClipboard.Text = "Copy";
+            this.btnCopyToClipboard.UseVisualStyleBackColor = true;
+            this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 386);
+            this.ClientSize = new System.Drawing.Size(975, 444);
+            this.Controls.Add(this.gpPasswordGenerator);
             this.Controls.Add(this.dataGridRecords);
-            this.Controls.Add(this.gpEdit);
+            this.Controls.Add(this.gpAdd);
             this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "KeyVault";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.gpEdit.ResumeLayout(false);
-            this.gpEdit.PerformLayout();
+            this.gpAdd.ResumeLayout(false);
+            this.gpAdd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRecords)).EndInit();
+            this.gpPasswordGenerator.ResumeLayout(false);
+            this.gpPasswordGenerator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPasswordLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,7 +346,7 @@
         private ToolStripMenuItem accountToolStripMenuItem;
         private ToolStripMenuItem toolToolStripMenuItem;
         private ToolStripMenuItem passwordGeneratorToolStripMenuItem;
-        private GroupBox gpEdit;
+        private GroupBox gpAdd;
         private TextBox txtPassword;
         private TextBox txtMail;
         private TextBox txtURL;
@@ -241,5 +357,14 @@
         private Label label1;
         private Button btnAdd;
         private DataGridView dataGridRecords;
+        private GroupBox gpPasswordGenerator;
+        private TextBox txtGeneratedPassword;
+        private Button btnGeneratePassword;
+        private Label label5;
+        private NumericUpDown nudPasswordLength;
+        private Label label6;
+        private CheckBox cbNumbers;
+        private CheckBox cbSymbols;
+        private Button btnCopyToClipboard;
     }
 }
