@@ -1,5 +1,6 @@
 ﻿using BA_Project.Business.Managers;
 using BA_Project.DAL.Entities;
+using BA_Project.Form_Manager;
 
 namespace BA_Project
 {
@@ -151,6 +152,13 @@ namespace BA_Project
 
             if (form.ShowDialog() == DialogResult.OK)
                 this.Text = $"KeyVault | {GenericFunctions.CurrentUser.Username}";
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormManager<FormLogin>.CreateForm().Show();
+            GenericFunctions.CurrentUser = null;
+            this.Close();
         }
     }
 }

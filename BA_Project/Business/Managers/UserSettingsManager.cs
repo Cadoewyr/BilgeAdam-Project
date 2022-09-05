@@ -24,7 +24,6 @@ namespace BA_Project.Business.Managers
 
             if (temp != null)
             {
-                temp.RememberMe = newEntity.RememberMe;
                 DB.Instance.SaveChanges();
             }
             else

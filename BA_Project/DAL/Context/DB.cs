@@ -8,6 +8,17 @@ namespace BA_Project.DAL.Context
         DB()
         {
             Database.EnsureCreated();
+
+            //if (AppSettings.ToList().Count == 0)
+            //{
+            //    AppSettings.Add(new AppSetting()
+            //    {
+            //        Key = "RememberMeUserID",
+            //        Value = null
+            //    });
+
+            //    SaveChanges();
+            //}
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +43,7 @@ namespace BA_Project.DAL.Context
             {
                 if (_instance == null)
                     _instance = new DB();
+
                 return _instance;
             }
         }
@@ -39,5 +51,6 @@ namespace BA_Project.DAL.Context
         public DbSet<User> Users { get; set; }
         public DbSet<UserSettings> Settings { get; set; }
         public DbSet<Record> Records { get; set; }
+        public DbSet<AppSetting> AppSettings { get; set; }
     }
 }

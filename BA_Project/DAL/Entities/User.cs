@@ -20,7 +20,6 @@ namespace BA_Project.DAL.Entities
             {
                 Settings = new UserSettings()
                 {
-                    RememberMe = false,
                     User = this,
                     UserID = ID,
                     AccountRecoveryCode = GenericFunctions.GeneratePassword(GenericFunctions.PasswordGeneratingOptions.CharactersAndNumbers, 24)

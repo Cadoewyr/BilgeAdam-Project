@@ -14,6 +14,7 @@ namespace BA_Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            var db = DB.Instance; // for initiate database
             FormManager<FormLogin>.CreateForm().Show();
             Application.Run();
         }

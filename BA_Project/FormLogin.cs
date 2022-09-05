@@ -21,6 +21,9 @@ namespace BA_Project
                 var form = (FormMain)FormManager<FormMain>.CreateForm();
                 GenericFunctions.CurrentUser = userManager.Get(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)).FirstOrDefault();
                 form.Show();
+
+                GenericFunctions.RememberMe(cbRememberMe.Checked, txtPassword.Text);
+
                 this.Close();
             }
             else
@@ -57,6 +60,21 @@ namespace BA_Project
             }
             else
                 MessageBox.Show("Username is wrong.");
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            AppSettingManager asm = new AppSettingManager();
+
+            if(asm.Exists(x => x.Key == "RememberMeUsername" & x.Value != null) & asm.Exists(x => x.Key == "RememberMeUserPassword" & x.Value != null))
+            {
+                cbRememberMe.Checked = true;
+                AppSetting username = asm.Get(x => x.Key == "RememberMeUsername" & x.Value != null).First();
+                AppSetting password = asm.Get(x => x.Key == "RememberMeUserPassword" & x.Value != null).First();
+
+                txtUsername.Text = username.Value;
+                txtPassword.Text = password.Value;
+            }
         }
     }
 }

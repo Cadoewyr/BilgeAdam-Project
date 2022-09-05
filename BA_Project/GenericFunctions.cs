@@ -1,4 +1,5 @@
-﻿using BA_Project.DAL.Context;
+﻿using BA_Project.Business.Managers;
+using BA_Project.DAL.Context;
 using BA_Project.DAL.Entities;
 using System.Net;
 using System.Net.Mail;
@@ -170,6 +171,43 @@ namespace BA_Project
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public static void RememberMe(bool c, string password)
+        {
+            AppSettingManager asm = new AppSettingManager();
+
+            try
+            {
+                if (!asm.Exists(x => x.Key == "RememberMeUsername"))
+                {
+                    asm.Add(new AppSetting()
+                    {
+                        Key = "RememberMeUsername",
+                        Value = c ? GenericFunctions.CurrentUser.Username : null
+                    });
+                }
+                else
+                {
+                    asm.Update(asm.Get(x => x.Key == "RememberMeUsername").First(), c ? GenericFunctions.CurrentUser.Username : null);
+                }
+
+                if (!asm.Exists(x => x.Key == "RememberMeUserPassword"))
+                {
+                    asm.Add(new AppSetting()
+                    {
+                        Key = "RememberMeUserPassword",
+                        Value = c ? password : null
+                    });
+                }
+                else
+                {
+                    asm.Update(asm.Get(x => x.Key == "RememberMeUserPassword").First(), c ? password : null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

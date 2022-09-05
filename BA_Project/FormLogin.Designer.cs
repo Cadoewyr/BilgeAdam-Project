@@ -35,11 +35,12 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnNavigateToRegister = new System.Windows.Forms.Button();
             this.btnResetPassword = new System.Windows.Forms.Button();
+            this.cbRememberMe = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(94, 79);
+            this.btnLogin.Location = new System.Drawing.Point(94, 104);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(148, 23);
             this.btnLogin.TabIndex = 2;
@@ -84,7 +85,7 @@
             // 
             // btnNavigateToRegister
             // 
-            this.btnNavigateToRegister.Location = new System.Drawing.Point(94, 108);
+            this.btnNavigateToRegister.Location = new System.Drawing.Point(94, 133);
             this.btnNavigateToRegister.Name = "btnNavigateToRegister";
             this.btnNavigateToRegister.Size = new System.Drawing.Size(148, 23);
             this.btnNavigateToRegister.TabIndex = 3;
@@ -94,7 +95,7 @@
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Location = new System.Drawing.Point(94, 137);
+            this.btnResetPassword.Location = new System.Drawing.Point(94, 162);
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.Size = new System.Drawing.Size(148, 23);
             this.btnResetPassword.TabIndex = 4;
@@ -102,12 +103,23 @@
             this.btnResetPassword.UseVisualStyleBackColor = true;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
+            // cbRememberMe
+            // 
+            this.cbRememberMe.AutoSize = true;
+            this.cbRememberMe.Location = new System.Drawing.Point(94, 79);
+            this.cbRememberMe.Name = "cbRememberMe";
+            this.cbRememberMe.Size = new System.Drawing.Size(104, 19);
+            this.cbRememberMe.TabIndex = 9;
+            this.cbRememberMe.Text = "Remember Me";
+            this.cbRememberMe.UseVisualStyleBackColor = true;
+            // 
             // FormLogin
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 176);
+            this.ClientSize = new System.Drawing.Size(276, 196);
+            this.Controls.Add(this.cbRememberMe);
             this.Controls.Add(this.btnResetPassword);
             this.Controls.Add(this.btnNavigateToRegister);
             this.Controls.Add(this.btnLogin);
@@ -121,6 +133,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.FormLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +148,6 @@
         private TextBox txtUsername;
         private Button btnNavigateToRegister;
         private Button btnResetPassword;
+        private CheckBox cbRememberMe;
     }
 }
