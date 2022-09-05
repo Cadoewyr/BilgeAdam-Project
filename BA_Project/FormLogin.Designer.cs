@@ -43,7 +43,7 @@
             this.btnLogin.Location = new System.Drawing.Point(94, 104);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(148, 23);
-            this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -88,7 +88,7 @@
             this.btnNavigateToRegister.Location = new System.Drawing.Point(94, 133);
             this.btnNavigateToRegister.Name = "btnNavigateToRegister";
             this.btnNavigateToRegister.Size = new System.Drawing.Size(148, 23);
-            this.btnNavigateToRegister.TabIndex = 3;
+            this.btnNavigateToRegister.TabIndex = 4;
             this.btnNavigateToRegister.Text = "Register";
             this.btnNavigateToRegister.UseVisualStyleBackColor = true;
             this.btnNavigateToRegister.Click += new System.EventHandler(this.btnNavigateToRegister_Click);
@@ -98,7 +98,7 @@
             this.btnResetPassword.Location = new System.Drawing.Point(94, 162);
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.Size = new System.Drawing.Size(148, 23);
-            this.btnResetPassword.TabIndex = 4;
+            this.btnResetPassword.TabIndex = 5;
             this.btnResetPassword.Text = "Reset Password";
             this.btnResetPassword.UseVisualStyleBackColor = true;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
@@ -109,7 +109,7 @@
             this.cbRememberMe.Location = new System.Drawing.Point(94, 79);
             this.cbRememberMe.Name = "cbRememberMe";
             this.cbRememberMe.Size = new System.Drawing.Size(104, 19);
-            this.cbRememberMe.TabIndex = 9;
+            this.cbRememberMe.TabIndex = 2;
             this.cbRememberMe.Text = "Remember Me";
             this.cbRememberMe.UseVisualStyleBackColor = true;
             // 
