@@ -69,11 +69,9 @@ namespace BA_Project
             if(asm.Exists(x => x.Key == "RememberMeUsername" & x.Value != null) & asm.Exists(x => x.Key == "RememberMeUserPassword" & x.Value != null))
             {
                 cbRememberMe.Checked = true;
-                AppSetting username = asm.Get(x => x.Key == "RememberMeUsername" & x.Value != null).First();
-                AppSetting password = asm.Get(x => x.Key == "RememberMeUserPassword" & x.Value != null).First();
 
-                txtUsername.Text = username.Value;
-                txtPassword.Text = password.Value;
+                txtUsername.Text = asm.Get(x => x.Key == "RememberMeUsername" & x.Value != null).First().Value;
+                txtPassword.Text = asm.Get(x => x.Key == "RememberMeUserPassword" & x.Value != null).First().Value;
             }
         }
     }

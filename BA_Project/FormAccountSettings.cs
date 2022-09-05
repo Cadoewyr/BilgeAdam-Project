@@ -1,9 +1,5 @@
 ﻿using BA_Project.Business.Managers;
 using BA_Project.Form_Manager;
-using BA_Project.Validation;
-using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using User = BA_Project.DAL.Entities.User;
 
 namespace BA_Project
 {
@@ -88,6 +84,17 @@ namespace BA_Project
             {
                 try
                 {
+                    AppSettingManager asm = new AppSettingManager();
+
+                    string username = asm.Get(x => x.Key == "RememberMeUsername").First().Value;
+                    string password = asm.Get(x => x.Key == "RememberMeUserPassword").First().Value;
+
+                    if (username == GenericFunctions.CurrentUser.Username & Cryptography.MD5.Encrypt(password) == GenericFunctions.CurrentUser.Password)
+                    {
+                        asm.Remove(asm.Get(x => x.Key == "RememberMeUsername").First());
+                        asm.Remove(asm.Get(x => x.Key == "RememberMeUserPassword").First());
+                    }
+
                     um.Remove(GenericFunctions.CurrentUser);
                     GenericFunctions.CurrentUser = null;
 
@@ -136,7 +143,7 @@ namespace BA_Project
 
         private void FormAccountSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(GenericFunctions.CurrentUser != null)
+            if (GenericFunctions.CurrentUser != null)
                 this.DialogResult = DialogResult.OK;
         }
     }
