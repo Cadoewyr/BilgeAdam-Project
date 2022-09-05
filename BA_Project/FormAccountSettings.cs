@@ -43,14 +43,7 @@ namespace BA_Project
         {
             try
             {
-                var result = new UserValidator().Validate(new User()
-                {
-                    Username = GenericFunctions.CurrentUser.Username,
-                    Password = txtNewPassword1.Text,
-                    EMail = GenericFunctions.CurrentUser.EMail
-                });
-
-                if (result.IsValid & GenericFunctions.CurrentUser.Password == Cryptography.MD5.Encrypt(txtCurrentPassword.Text))
+                if (GenericFunctions.CurrentUser.Password == Cryptography.MD5.Encrypt(txtCurrentPassword.Text))
                 {
                     um.Update(GenericFunctions.CurrentUser, null, txtNewPassword1.Text, null);
 
@@ -58,19 +51,7 @@ namespace BA_Project
                 }
                 else
                 {
-                    if (!result.IsValid)
-                    {
-                        StringBuilder SB = new StringBuilder();
-
-                        foreach (var error in result.Errors)
-                        {
-                            SB.Append(error.ErrorMessage).AppendLine();
-                        }
-
-                        throw new Exception(SB.ToString());
-                    }
-                    else
-                        MessageBox.Show("Current password is wrong.");
+                    throw new Exception("Current password is wrong.");
                 }
             }
             catch (Exception ex)
@@ -155,7 +136,8 @@ namespace BA_Project
 
         private void FormAccountSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            if(GenericFunctions.CurrentUser != null)
+                this.DialogResult = DialogResult.OK;
         }
     }
 }

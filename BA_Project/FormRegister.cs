@@ -20,7 +20,7 @@ namespace BA_Project
                 {
                     Username = txtUsername.Text.Trim(),
                     EMail = txtEMail.Text,
-                    Password = txtPassword.Text
+                    Password = Cryptography.MD5.Encrypt(txtPassword.Text)
                 });
 
                 MessageBox.Show("Successfully registered. Navigating to login.");
