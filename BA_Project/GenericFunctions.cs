@@ -1,4 +1,7 @@
 ﻿using BA_Project.DAL.Context;
+using BA_Project.DAL.Entities;
+using System.Net;
+using System.Net.Mail;
 using static System.Windows.Forms.Control;
 
 namespace BA_Project
@@ -11,6 +14,14 @@ namespace BA_Project
             CharactersAndNumbers = 1,
             CharactersAndSymbols = 2,
             CharactersAndSymbolsAndNumbers= 3
+        }
+
+        static User _currentUser;
+
+        public static User CurrentUser
+        {
+            get { return _currentUser; }
+            set { _currentUser = value; }
         }
 
         public static void ExitIfAnyFormNotExist()
@@ -110,7 +121,7 @@ namespace BA_Project
         }
         public static string GeneratePassword(PasswordGeneratingOptions passwordGeneratingOptions, int? length)
         {
-            char[] chars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'y', 'z', 'x', 'w', 'q' };
+            char[] chars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'ı', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'y', 'z', 'x', 'w', 'q' };
             char[] numbers = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
             char[] symbols = { '!', '$', '-', '_', '&', '.', ',', ';', ':', '*', '?', '/', '=', '%', '+', '<', '>' };
 
@@ -142,6 +153,24 @@ namespace BA_Project
             }
 
             return password;
+        }
+        public static void SendRecoveryMail(string mail, string recoveryCode)
+        {
+            try
+            {
+                var smtpClient = new SmtpClient("smtp-mail.outlook.com", 587)
+                {
+                    Credentials = new NetworkCredential("keyvaulthelp@outlook.com", "V9PQcKKwla"),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true
+                };
+
+                smtpClient.Send("keyvaulthelp@outlook.com", mail, "KeyVault Account Recovery", $"Your account recovery code: {recoveryCode}");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         static char[] ShuffleCharArray(params Array[] arrays)

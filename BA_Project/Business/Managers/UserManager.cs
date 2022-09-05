@@ -27,7 +27,7 @@ namespace BA_Project.Business.Managers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    throw ex;
                 }
             }
             else
@@ -42,38 +42,43 @@ namespace BA_Project.Business.Managers
                 throw new Exception(SB.ToString());
             }
         }
-        public void Update(User oldEntity, User newEntity)
+        public void Update(User entity, string? username, string? password, string? email)
         {
-            var result = new UserValidator().Validate(newEntity);
+            User temp = new User()
+            {
+                Username = username == null ? entity.Username + DateTime.Now.ToLongTimeString() : username,
+                Password = password == null ? entity.Password : password,
+                EMail = email == null ? entity.EMail : email
+            };
+
+            var result = new UserValidator().Validate(temp);
 
             if (result.IsValid)
             {
-                var temp = DB.Instance.Users.Find(oldEntity.ID);
+                User user = DB.Instance.Users.Find(entity.ID);
 
-                if (temp != null)
+                if (user != null)
                 {
-                    temp.Records = newEntity.Records;
-                    temp.Settings = newEntity.Settings;
-                    temp.Username = newEntity.Username;
-                    temp.Password = newEntity.Password;
-
-                    DB.Instance.SaveChanges();
+                    user.Username = username == null ? entity.Username : username;
+                    user.Password = password == null ? temp.Password : Cryptography.MD5.Encrypt(password);
+                    user.EMail = temp.EMail;
                 }
                 else
-                    throw new NullReferenceException("There is no any record.");
+                    throw new Exception("User doesnt exists.");
+
+                DB.Instance.SaveChanges();
             }
             else
             {
-                StringBuilder SB = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
 
                 foreach (var error in result.Errors)
                 {
-                    SB.Append(error.ErrorMessage).AppendLine();
+                    sb.Append(error.ErrorMessage).AppendLine();
                 }
 
-                throw new Exception(SB.ToString());
+                throw new Exception(sb.ToString());
             }
-            
         }
         public void Remove(User entity)
         {

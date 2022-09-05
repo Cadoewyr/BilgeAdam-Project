@@ -13,6 +13,7 @@ namespace BA_Project.DAL.Entities
         public bool RememberMe { get; set; }
         [NotMapped]
         public int UserID { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
+        public string AccountRecoveryCode { get; set; }
     }
 }

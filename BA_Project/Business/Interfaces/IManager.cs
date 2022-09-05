@@ -7,7 +7,6 @@ namespace BA_Project.Business.Interfaces
     {
         public void Add(T entity);
         public void Remove(T entity);
-        public void Update(T oldEntity, T newEntity);
         public List<T> Get(Expression<Func<T, bool>> predicate);
         public bool Exists(Expression<Func<T, bool>> predicate);
     }

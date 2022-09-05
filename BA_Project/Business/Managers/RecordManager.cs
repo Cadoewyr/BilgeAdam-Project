@@ -31,25 +31,33 @@ namespace BA_Project.Business.Managers
             }
 
         }
-        public void Update(Record oldEntity, Record newEntity)
+        public void Update(Record entity, string? recordName, string? email, string? url, string? password)
         {
-            var result = new RecordValidator().Validate(newEntity);
+            Record temp = new Record()
+            {
+                RecordName = recordName == null ? entity.RecordName : recordName,
+                EMail = email == null ? entity.EMail : email,
+                URL = url == null ? entity.URL : url,
+                Password = password == null ? entity.Password : password
+            };
+
+            var result = new RecordValidator().Validate(temp);
 
             if (result.IsValid)
             {
-                var temp = DB.Instance.Records.Find(oldEntity.ID);
+                var rec = DB.Instance.Records.Find(entity.ID);
 
-                if (temp != null)
+                if (rec != null)
                 {
-                    temp.RecordName = newEntity.RecordName;
-                    temp.URL = newEntity.URL;
-                    temp.Mail = newEntity.Mail;
-                    temp.Password = newEntity.Password;
+                    rec.RecordName = temp.RecordName;
+                    rec.URL = temp.URL;
+                    rec.EMail = temp.EMail;
+                    rec.Password = temp.Password;
 
                     DB.Instance.SaveChanges();
                 }
                 else
-                    throw new NullReferenceException("There is no any record.");
+                    throw new NullReferenceException("Record doesnt exists.");
             }
             else
             {
@@ -66,6 +74,11 @@ namespace BA_Project.Business.Managers
         public void Remove(Record entity)
         {
             DB.Instance.Records.Remove(entity);
+            DB.Instance.SaveChanges();
+        }
+        public void Remove(Expression<Func<Record, bool>> predicate)
+        {
+            DB.Instance.Records.RemoveRange(DB.Instance.Records.Where(predicate));
             DB.Instance.SaveChanges();
         }
         public List<Record> Get(Expression<Func<Record, bool>>? predicate)

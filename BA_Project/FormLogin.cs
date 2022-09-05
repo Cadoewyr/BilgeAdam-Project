@@ -1,5 +1,6 @@
 ﻿using BA_Project.Business.Managers;
 using BA_Project.Cryptography;
+using BA_Project.DAL.Entities;
 using BA_Project.Form_Manager;
 
 namespace BA_Project
@@ -18,7 +19,7 @@ namespace BA_Project
             if (userManager.Exists(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)))
             {
                 var form = (FormMain)FormManager<FormMain>.CreateForm();
-                form.SetCurrentUser(userManager.Get(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)).FirstOrDefault());
+                GenericFunctions.CurrentUser = userManager.Get(u => u.Username == txtUsername.Text & u.Password == MD5.Encrypt(txtPassword.Text)).FirstOrDefault();
                 form.Show();
                 this.Close();
             }
@@ -35,6 +36,27 @@ namespace BA_Project
         {
             FormManager<FormRegister>.CreateForm().Show();
             this.Close();
+        }
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            if (new UserManager().Exists(u => u.Username == txtUsername.Text))
+            {
+                User temp = new UserManager().Get(u => u.Username == txtUsername.Text).First();
+                try
+                {
+                    GenericFunctions.SendRecoveryMail(temp.EMail, temp.Settings.AccountRecoveryCode);
+                    FormAccountRecovery form = new FormAccountRecovery();
+                    form.SetUser(temp);
+                    form.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+                MessageBox.Show("Username is wrong.");
         }
     }
 }

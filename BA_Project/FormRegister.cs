@@ -19,7 +19,8 @@ namespace BA_Project
                 new UserManager().Add(new User()
                 {
                     Username = txtUsername.Text.Trim(),
-                    Password = MD5.Encrypt(txtPassword.Text)
+                    EMail = txtEMail.Text,
+                    Password = txtPassword.Text
                 });
 
                 MessageBox.Show("Successfully registered. Navigating to login.");
@@ -30,6 +31,7 @@ namespace BA_Project
             catch (Exception ex)
             {
                 GenericFunctions.ClearControls(this.Controls);
+                txtUsername.Focus();
                 MessageBox.Show(ex.Message);
             }
         }
