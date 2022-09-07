@@ -20,7 +20,7 @@ namespace BA_Project
                 {
                     Username = txtUsername.Text.Trim(),
                     EMail = txtEMail.Text,
-                    Password = Cryptography.MD5.Encrypt(txtPassword.Text)
+                    Password = Cryptography.MD5.Encrypt(txtPassword1.Text)
                 });
 
                 MessageBox.Show("Successfully registered. Navigating to login.");
@@ -40,6 +40,11 @@ namespace BA_Project
         {
             FormManager<FormLogin>.CreateForm().Show();
             this.Close();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            btnRegister.Enabled = (txtPassword1.Text == txtPassword2.Text) & (!string.IsNullOrEmpty(txtPassword1.Text) & !string.IsNullOrEmpty(txtPassword2.Text));
         }
     }
 }

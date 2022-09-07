@@ -36,12 +36,14 @@
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAdd = new System.Windows.Forms.GroupBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtEMail = new System.Windows.Forms.TextBox();
             this.txtURL = new System.Windows.Forms.TextBox();
             this.txtRecordName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,8 +60,6 @@
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.gbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRecords)).BeginInit();
@@ -91,14 +91,14 @@
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -137,12 +137,19 @@
             this.gbAdd.TabStop = false;
             this.gbAdd.Text = "Add Record";
             // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(103, 123);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(128, 23);
+            this.txtUsername.TabIndex = 3;
+            // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(103, 181);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(128, 23);
-            this.btnAdd.TabIndex = 4;
+            this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -152,7 +159,7 @@
             this.txtPassword.Location = new System.Drawing.Point(103, 152);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(128, 23);
-            this.txtPassword.TabIndex = 3;
+            this.txtPassword.TabIndex = 4;
             // 
             // txtEMail
             // 
@@ -183,6 +190,15 @@
             this.label4.Size = new System.Drawing.Size(57, 15);
             this.label4.TabIndex = 0;
             this.label4.Text = "Password";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 15);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Username";
             // 
             // label3
             // 
@@ -248,7 +264,7 @@
             this.cbNumbers.Location = new System.Drawing.Point(121, 61);
             this.cbNumbers.Name = "cbNumbers";
             this.cbNumbers.Size = new System.Drawing.Size(75, 19);
-            this.cbNumbers.TabIndex = 6;
+            this.cbNumbers.TabIndex = 7;
             this.cbNumbers.Text = "Numbers";
             this.cbNumbers.UseVisualStyleBackColor = true;
             // 
@@ -258,7 +274,7 @@
             this.cbSymbols.Location = new System.Drawing.Point(121, 86);
             this.cbSymbols.Name = "cbSymbols";
             this.cbSymbols.Size = new System.Drawing.Size(71, 19);
-            this.cbSymbols.TabIndex = 7;
+            this.cbSymbols.TabIndex = 8;
             this.cbSymbols.Text = "Symbols";
             this.cbSymbols.UseVisualStyleBackColor = true;
             // 
@@ -290,7 +306,7 @@
             0});
             this.nudPasswordLength.Name = "nudPasswordLength";
             this.nudPasswordLength.Size = new System.Drawing.Size(110, 23);
-            this.nudPasswordLength.TabIndex = 5;
+            this.nudPasswordLength.TabIndex = 6;
             this.nudPasswordLength.Value = new decimal(new int[] {
             8,
             0,
@@ -302,7 +318,7 @@
             this.btnCopyToClipboard.Location = new System.Drawing.Point(18, 174);
             this.btnCopyToClipboard.Name = "btnCopyToClipboard";
             this.btnCopyToClipboard.Size = new System.Drawing.Size(213, 23);
-            this.btnCopyToClipboard.TabIndex = 10;
+            this.btnCopyToClipboard.TabIndex = 11;
             this.btnCopyToClipboard.Text = "Copy";
             this.btnCopyToClipboard.UseVisualStyleBackColor = true;
             this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
@@ -312,7 +328,7 @@
             this.btnGeneratePassword.Location = new System.Drawing.Point(18, 145);
             this.btnGeneratePassword.Name = "btnGeneratePassword";
             this.btnGeneratePassword.Size = new System.Drawing.Size(213, 23);
-            this.btnGeneratePassword.TabIndex = 9;
+            this.btnGeneratePassword.TabIndex = 10;
             this.btnGeneratePassword.Text = "Generate";
             this.btnGeneratePassword.UseVisualStyleBackColor = true;
             this.btnGeneratePassword.Click += new System.EventHandler(this.btnGeneratePassword_Click);
@@ -323,7 +339,7 @@
             this.txtGeneratedPassword.Name = "txtGeneratedPassword";
             this.txtGeneratedPassword.ReadOnly = true;
             this.txtGeneratedPassword.Size = new System.Drawing.Size(213, 23);
-            this.txtGeneratedPassword.TabIndex = 8;
+            this.txtGeneratedPassword.TabIndex = 9;
             // 
             // gbFilter
             // 
@@ -350,24 +366,8 @@
             this.txtFilter.Location = new System.Drawing.Point(103, 28);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(128, 23);
-            this.txtFilter.TabIndex = 11;
+            this.txtFilter.TabIndex = 12;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 126);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 15);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Username";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Location = new System.Drawing.Point(103, 123);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(128, 23);
-            this.txtUsername.TabIndex = 5;
             // 
             // FormMain
             // 
