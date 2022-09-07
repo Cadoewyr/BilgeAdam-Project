@@ -29,7 +29,7 @@ namespace BA_Project
             foreach (Record record in records)
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dataGridView, record.RecordName, record.URL, record.EMail, record.Password);
+                row.CreateCells(dataGridView, record.RecordName, record.URL, record.EMail, record.Username, record.Password);
                 row.Tag = record;
                 dataGridView.Rows.Add(row);
             }
