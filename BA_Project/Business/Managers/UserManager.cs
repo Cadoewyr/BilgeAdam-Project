@@ -11,13 +11,15 @@ namespace BA_Project.Business.Managers
     {
         public void Add(User entity)
         {
+            entity.Username = entity.Username.Trim();
+
             var result = new UserValidator().Validate(entity);
 
             if (result.IsValid)
             {
                 try
                 {
-                    if (DB.Instance.Users.Where(x => x.Username == entity.Username).FirstOrDefault() == null)
+                    if (!DB.Instance.Users.Any(x => x.Username == entity.Username))
                     {
                         DB.Instance.Users.Add(entity);
                         DB.Instance.SaveChanges();
@@ -46,7 +48,7 @@ namespace BA_Project.Business.Managers
         {
             User temp = new User()
             {
-                Username = username == null ? entity.Username + DateTime.Now.ToLongTimeString() : username,
+                Username = username == null ? entity.Username.Trim() + DateTime.Now.ToLongTimeString() : username,
                 Password = password == null ? entity.Password : password,
                 EMail = email == null ? entity.EMail : email
             };
@@ -59,7 +61,7 @@ namespace BA_Project.Business.Managers
 
                 if (user != null)
                 {
-                    user.Username = username == null ? entity.Username : username;
+                    user.Username = (username == null ? entity.Username : username).Trim();
                     user.Password = password == null ? temp.Password : Cryptography.MD5.Encrypt(password);
                     user.EMail = temp.EMail;
                 }

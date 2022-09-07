@@ -11,6 +11,12 @@ namespace BA_Project.Business.Managers
     {
         public void Add(Record entity)
         {
+            entity.RecordName = entity.RecordName.Trim();
+            entity.EMail = entity.EMail.Trim();
+            entity.URL = entity.URL.Trim();
+            entity.Username = entity.Username.Trim();
+            entity.Password = entity.Password;
+
             var result = new RecordValidator().Validate(entity);
 
             if (result.IsValid)
@@ -31,13 +37,14 @@ namespace BA_Project.Business.Managers
             }
 
         }
-        public void Update(Record entity, string? recordName, string? email, string? url, string? password)
+        public void Update(Record entity, string? recordName, string? email, string? username, string? url, string? password)
         {
             Record temp = new Record()
             {
-                RecordName = recordName == null ? entity.RecordName : recordName,
-                EMail = email == null ? entity.EMail : email,
-                URL = url == null ? entity.URL : url,
+                RecordName = (recordName == null ? entity.RecordName : recordName).Trim(),
+                EMail = (email == null ? entity.EMail : email).Trim(),
+                URL = (url == null ? entity.URL : url).Trim(),
+                Username = (username == null ? entity.Username : username).Trim(),
                 Password = password == null ? entity.Password : password
             };
 
@@ -52,6 +59,7 @@ namespace BA_Project.Business.Managers
                     rec.RecordName = temp.RecordName;
                     rec.URL = temp.URL;
                     rec.EMail = temp.EMail;
+                    rec.Username = temp.Username;
                     rec.Password = temp.Password;
 
                     DB.Instance.SaveChanges();

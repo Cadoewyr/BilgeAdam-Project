@@ -20,6 +20,7 @@ namespace BA_Project
                 dataGridView.Columns.Add("RecordName", "Record Name");
                 dataGridView.Columns.Add("URL", "URL");
                 dataGridView.Columns.Add("EMail", "E-Mail");
+                dataGridView.Columns.Add("Username", "Username");
                 dataGridView.Columns.Add("Password", "Password");
             }
 
@@ -59,6 +60,7 @@ namespace BA_Project
                     RecordName = txtRecordName.Text,
                     URL = txtURL.Text,
                     EMail = txtEMail.Text,
+                    Username = txtUsername.Text,
                     Password = txtPassword.Text,
                     User = new UserManager().Get(u => u.ID == GenericFunctions.CurrentUser.ID).First()
                 });
@@ -132,6 +134,7 @@ namespace BA_Project
                 rm.Update(currentRow.Tag as Record,
                     currentRow.Cells["RecordName"].Value.ToString(),
                     currentRow.Cells["EMail"].Value.ToString(),
+                    currentRow.Cells["Username"].Value.ToString(),
                     currentRow.Cells["URL"].Value.ToString(),
                     currentRow.Cells["Password"].Value.ToString()
                     );

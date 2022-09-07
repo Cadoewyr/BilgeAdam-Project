@@ -58,6 +58,8 @@
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.gbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRecords)).BeginInit();
@@ -117,25 +119,27 @@
             // 
             // gbAdd
             // 
+            this.gbAdd.Controls.Add(this.txtUsername);
             this.gbAdd.Controls.Add(this.btnAdd);
             this.gbAdd.Controls.Add(this.txtPassword);
             this.gbAdd.Controls.Add(this.txtEMail);
             this.gbAdd.Controls.Add(this.txtURL);
             this.gbAdd.Controls.Add(this.txtRecordName);
             this.gbAdd.Controls.Add(this.label4);
+            this.gbAdd.Controls.Add(this.label8);
             this.gbAdd.Controls.Add(this.label3);
             this.gbAdd.Controls.Add(this.label2);
             this.gbAdd.Controls.Add(this.label1);
             this.gbAdd.Location = new System.Drawing.Point(718, 27);
             this.gbAdd.Name = "gbAdd";
-            this.gbAdd.Size = new System.Drawing.Size(250, 191);
+            this.gbAdd.Size = new System.Drawing.Size(250, 220);
             this.gbAdd.TabIndex = 2;
             this.gbAdd.TabStop = false;
             this.gbAdd.Text = "Add Record";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(103, 152);
+            this.btnAdd.Location = new System.Drawing.Point(103, 181);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(128, 23);
             this.btnAdd.TabIndex = 4;
@@ -145,7 +149,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(103, 123);
+            this.txtPassword.Location = new System.Drawing.Point(103, 152);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(128, 23);
             this.txtPassword.TabIndex = 3;
@@ -174,7 +178,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 126);
+            this.label4.Location = new System.Drawing.Point(18, 155);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 15);
             this.label4.TabIndex = 0;
@@ -216,7 +220,7 @@
             this.dataGridRecords.MultiSelect = false;
             this.dataGridRecords.Name = "dataGridRecords";
             this.dataGridRecords.RowTemplate.Height = 25;
-            this.dataGridRecords.Size = new System.Drawing.Size(700, 483);
+            this.dataGridRecords.Size = new System.Drawing.Size(700, 512);
             this.dataGridRecords.TabIndex = 12;
             this.dataGridRecords.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRecords_CellValueChanged);
             this.dataGridRecords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridRecords_KeyDown);
@@ -231,7 +235,7 @@
             this.gbPasswordGenerator.Controls.Add(this.btnCopyToClipboard);
             this.gbPasswordGenerator.Controls.Add(this.btnGeneratePassword);
             this.gbPasswordGenerator.Controls.Add(this.txtGeneratedPassword);
-            this.gbPasswordGenerator.Location = new System.Drawing.Point(718, 224);
+            this.gbPasswordGenerator.Location = new System.Drawing.Point(718, 253);
             this.gbPasswordGenerator.Name = "gbPasswordGenerator";
             this.gbPasswordGenerator.Size = new System.Drawing.Size(250, 213);
             this.gbPasswordGenerator.TabIndex = 5;
@@ -325,7 +329,7 @@
             // 
             this.gbFilter.Controls.Add(this.label7);
             this.gbFilter.Controls.Add(this.txtFilter);
-            this.gbFilter.Location = new System.Drawing.Point(718, 443);
+            this.gbFilter.Location = new System.Drawing.Point(718, 472);
             this.gbFilter.Name = "gbFilter";
             this.gbFilter.Size = new System.Drawing.Size(250, 67);
             this.gbFilter.TabIndex = 6;
@@ -349,11 +353,27 @@
             this.txtFilter.TabIndex = 11;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 15);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Username";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(103, 123);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(128, 23);
+            this.txtUsername.TabIndex = 5;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 519);
+            this.ClientSize = new System.Drawing.Size(975, 546);
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.gbPasswordGenerator);
             this.Controls.Add(this.dataGridRecords);
@@ -411,5 +431,7 @@
         private Label label7;
         private TextBox txtFilter;
         private ToolStripMenuItem signOutToolStripMenuItem;
+        private TextBox txtUsername;
+        private Label label8;
     }
 }
