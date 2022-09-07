@@ -8,22 +8,11 @@ namespace BA_Project.DAL.Context
         DB()
         {
             Database.EnsureCreated();
-
-            //if (AppSettings.ToList().Count == 0)
-            //{
-            //    AppSettings.Add(new AppSetting()
-            //    {
-            //        Key = "RememberMeUserID",
-            //        Value = null
-            //    });
-
-            //    SaveChanges();
-            //}
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"data source=C:\Users\omery\Desktop\test.db");
+            optionsBuilder.UseSqlite(@"data source=keyvault.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
