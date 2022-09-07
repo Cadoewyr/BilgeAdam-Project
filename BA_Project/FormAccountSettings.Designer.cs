@@ -250,6 +250,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Account Settings";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormAccountSettings_FormClosed);
             this.Load += new System.EventHandler(this.FormAccountSettings_Load);
             this.gbChangePassword.ResumeLayout(false);

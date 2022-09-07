@@ -125,15 +125,15 @@ namespace BA_Project
 
         private void dataGridRecords_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var dgv = (sender as DataGridView);
-
             try
             {
-                rm.Update(dgv.Rows[dgv.CurrentCell.RowIndex].Tag as Record,
-                    dgv.Rows[dgv.CurrentCell.RowIndex].Cells["RecordName"].Value.ToString(),
-                    dgv.Rows[dgv.CurrentCell.RowIndex].Cells["URL"].Value.ToString(),
-                    dgv.Rows[dgv.CurrentCell.RowIndex].Cells["EMail"].Value.ToString(),
-                    dgv.Rows[dgv.CurrentCell.RowIndex].Cells["Password"].Value.ToString()
+                var currentRow = (sender as DataGridView).Rows[e.RowIndex];
+
+                rm.Update(currentRow.Tag as Record,
+                    currentRow.Cells["RecordName"].Value.ToString(),
+                    currentRow.Cells["EMail"].Value.ToString(),
+                    currentRow.Cells["URL"].Value.ToString(),
+                    currentRow.Cells["Password"].Value.ToString()
                     );
             }
             catch (Exception ex)
