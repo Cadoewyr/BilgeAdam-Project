@@ -11,12 +11,22 @@ namespace BA_Project
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            var db = DB.Instance; // for initiate database
-            FormManager<FormLogin>.CreateForm().Show();
-            Application.Run();
+            using(var mutex = new Mutex(false, "KeyVault"))
+            {
+                bool isAnotherInstanceOpened = !mutex.WaitOne(TimeSpan.Zero);
+
+                if (isAnotherInstanceOpened)
+                    return;
+                else
+                {
+                    ApplicationConfiguration.Initialize();
+                    var db = DB.Instance; // for initiate database
+                    FormManager<FormLogin>.CreateForm().Show();
+                    Application.Run();
+                }
+
+                mutex.ReleaseMutex();
+            }
         }
     }
 }
