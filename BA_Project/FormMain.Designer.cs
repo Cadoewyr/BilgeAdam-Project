@@ -35,6 +35,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupAndRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAdd = new System.Windows.Forms.GroupBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -72,7 +75,8 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.accountToolStripMenuItem});
+            this.accountToolStripMenuItem,
+            this.backupAndRestoreToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(975, 24);
@@ -91,14 +95,14 @@
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -116,6 +120,29 @@
             this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.accountSettingsToolStripMenuItem.Text = "Account Settings";
             this.accountSettingsToolStripMenuItem.Click += new System.EventHandler(this.accountSettingsToolStripMenuItem_Click);
+            // 
+            // backupAndRestoreToolStripMenuItem
+            // 
+            this.backupAndRestoreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupDatabaseFileToolStripMenuItem,
+            this.restoreDatabaseFileToolStripMenuItem});
+            this.backupAndRestoreToolStripMenuItem.Name = "backupAndRestoreToolStripMenuItem";
+            this.backupAndRestoreToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
+            this.backupAndRestoreToolStripMenuItem.Text = "Backup And Restore";
+            // 
+            // backupDatabaseFileToolStripMenuItem
+            // 
+            this.backupDatabaseFileToolStripMenuItem.Name = "backupDatabaseFileToolStripMenuItem";
+            this.backupDatabaseFileToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.backupDatabaseFileToolStripMenuItem.Text = "Backup Database File";
+            this.backupDatabaseFileToolStripMenuItem.Click += new System.EventHandler(this.backupDatabaseFileToolStripMenuItem_Click);
+            // 
+            // restoreDatabaseFileToolStripMenuItem
+            // 
+            this.restoreDatabaseFileToolStripMenuItem.Name = "restoreDatabaseFileToolStripMenuItem";
+            this.restoreDatabaseFileToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.restoreDatabaseFileToolStripMenuItem.Text = "Restore Database File";
+            this.restoreDatabaseFileToolStripMenuItem.Click += new System.EventHandler(this.restoreDatabaseFileToolStripMenuItem_Click);
             // 
             // gbAdd
             // 
@@ -433,5 +460,8 @@
         private ToolStripMenuItem signOutToolStripMenuItem;
         private TextBox txtUsername;
         private Label label8;
+        private ToolStripMenuItem backupAndRestoreToolStripMenuItem;
+        private ToolStripMenuItem backupDatabaseFileToolStripMenuItem;
+        private ToolStripMenuItem restoreDatabaseFileToolStripMenuItem;
     }
 }

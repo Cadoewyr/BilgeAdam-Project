@@ -1,6 +1,8 @@
 ﻿using BA_Project.Business.Managers;
 using BA_Project.DAL.Context;
 using BA_Project.DAL.Entities;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Net.Mail;
 using static System.Windows.Forms.Control;
@@ -14,7 +16,7 @@ namespace BA_Project
             Characters = 0,
             CharactersAndNumbers = 1,
             CharactersAndSymbols = 2,
-            CharactersAndSymbolsAndNumbers= 3
+            CharactersAndSymbolsAndNumbers = 3
         }
 
         static User _currentUser;
@@ -30,6 +32,7 @@ namespace BA_Project
             if (Application.OpenForms.Count == 0)
             {
                 DB.Instance.CloseConnection();
+                SqliteConnection.ClearAllPools();
                 Application.Exit();
             }
         }
@@ -210,6 +213,75 @@ namespace BA_Project
                 MessageBox.Show(ex.Message);
             }
         }
+        public static void BackupDatabaseFile(string? targetPath)
+        {
+            if (File.Exists(Application.StartupPath + @"\keyvault.db"))
+            {
+                try
+                {
+                    using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+                    {
+                        fbd.Description = "Choose a directory to create the database backup file.";
+                        fbd.RootFolder = Environment.SpecialFolder.Desktop;
+                        fbd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                        fbd.ShowNewFolderButton = true;
+                        fbd.UseDescriptionForTitle = true;
+
+                        if ((Directory.Exists(targetPath) & targetPath != null) || fbd.ShowDialog() == DialogResult.OK)
+                        {
+                            DB.Instance.SaveChanges();
+                            DB.Instance.CloseConnection();
+
+                            SqliteConnection.ClearAllPools();
+
+                            string date = DateTime.Now.ToShortDateString().Replace(".", "-");
+                            string time = $"{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}";
+
+                            string directory = Directory.Exists(targetPath) & targetPath != null ? targetPath : fbd.SelectedPath;
+                            string filename = $"\\keyvault_{date}_{time}.db";
+                            File.Copy(Application.StartupPath + @"\keyvault.db", $"{directory}{filename}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+                throw new FileNotFoundException("Database file not found.");
+        }
+        public static void RestoreDatabaseFile()
+        {
+            try
+            {
+                using (OpenFileDialog fd = new OpenFileDialog())
+                {
+                    fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    fd.RestoreDirectory = true;
+                    fd.Multiselect = false;
+                    fd.Filter = "Database files (*.db)|*.db";
+
+                    if (fd.ShowDialog() == DialogResult.OK)
+                    {
+                        BackupDatabaseFile($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\KeyVault\Backups");
+                        Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\KeyVault\Backups");
+
+                        DB.Instance.Database.EnsureDeleted();
+                        DB.Instance.CloseConnection();
+
+                        SqliteConnection.ClearAllPools();
+
+                        File.Delete($@"{Application.StartupPath}\keyvault.db");
+                        File.Copy(fd.FileName, $@"{Application.StartupPath}\keyvault.db");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         static char[] ShuffleCharArray(params Array[] arrays)
         {
@@ -242,9 +314,9 @@ namespace BA_Project
 
             Random rnd = new Random();
 
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
             {
-                choosenChars += rnd.Next(0,2) == 0 ? array[rnd.Next(0, array.Length)].ToString().ToUpper() : array[rnd.Next(0, array.Length)].ToString().ToLower();
+                choosenChars += rnd.Next(0, 2) == 0 ? array[rnd.Next(0, array.Length)].ToString().ToUpper() : array[rnd.Next(0, array.Length)].ToString().ToLower();
             }
 
             return choosenChars;

@@ -20,7 +20,7 @@ namespace BA_Project
                 else
                 {
                     ApplicationConfiguration.Initialize();
-                    var db = DB.Instance; // for initiate database
+                    DB.Instance.Database.EnsureCreated(); // for initiate database
                     FormManager<FormLogin>.CreateForm().Show();
                     Application.Run();
                 }

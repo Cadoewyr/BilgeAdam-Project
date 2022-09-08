@@ -48,7 +48,7 @@ namespace BA_Project
             this.Text += $" | {GenericFunctions.CurrentUser.Username}";
             rm = new RecordManager();
 
-            FillDataGridView(this.dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID));
+            FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace BA_Project
             }
             finally
             {
-                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID));
+                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
                 GenericFunctions.ClearControls(gbAdd.Controls);
             }
         }
@@ -121,7 +121,7 @@ namespace BA_Project
             }
             finally
             {
-                FillDataGridView(this.dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID));
+                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
             }
         }
 
@@ -145,7 +145,7 @@ namespace BA_Project
             }
             finally
             {
-                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID));
+                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
             }
         }
 
@@ -162,6 +162,35 @@ namespace BA_Project
             FormManager<FormLogin>.CreateForm().Show();
             GenericFunctions.CurrentUser = null;
             this.Close();
+        }
+
+        private void backupDatabaseFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GenericFunctions.BackupDatabaseFile(null);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        private void restoreDatabaseFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GenericFunctions.RestoreDatabaseFile();
+                MessageBox.Show($"Old database backup file saved to {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)} directory. You need to login or register.");
+                
+                FormManager<FormLogin>.CreateForm().Show();
+                GenericFunctions.CurrentUser = null;
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
