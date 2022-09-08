@@ -2,7 +2,6 @@
 using BA_Project.DAL.Context;
 using BA_Project.DAL.Entities;
 using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Net.Mail;
 using static System.Windows.Forms.Control;
