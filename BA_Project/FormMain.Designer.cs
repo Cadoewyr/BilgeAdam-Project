@@ -257,8 +257,8 @@
             // dataGridRecords
             // 
             this.dataGridRecords.AllowUserToAddRows = false;
+            this.dataGridRecords.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dataGridRecords.Location = new System.Drawing.Point(12, 27);
             this.dataGridRecords.MultiSelect = false;
             this.dataGridRecords.Name = "dataGridRecords";

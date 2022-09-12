@@ -42,9 +42,9 @@ namespace BA_Project.Business.Managers
             Record temp = new Record()
             {
                 RecordName = (recordName == null ? entity.RecordName : recordName).Trim(),
-                EMail = (email == null ? entity.EMail : email).Trim(),
-                URL = (url == null ? entity.URL : url).Trim(),
-                Username = (username == null ? entity.Username : username).Trim(),
+                EMail = (email == null ? String.Empty : email).Trim(),
+                URL = (url == null ? String.Empty : url).Trim(),
+                Username = (username == null ? String.Empty : username).Trim(),
                 Password = password == null ? entity.Password : password
             };
 

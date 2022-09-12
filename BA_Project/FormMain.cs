@@ -113,11 +113,11 @@ namespace BA_Project
                 var currentRow = (sender as DataGridView).Rows[e.RowIndex];
 
                 rm.Update(currentRow.Tag as Record,
-                    currentRow.Cells["RecordName"].Value.ToString(),
-                    currentRow.Cells["EMail"].Value.ToString(),
-                    currentRow.Cells["Username"].Value.ToString(),
-                    currentRow.Cells["URL"].Value.ToString(),
-                    currentRow.Cells["Password"].Value.ToString()
+                    currentRow.Cells["RecordName"].Value == null ? String.Empty : currentRow.Cells["RecordName"].Value.ToString(),
+                    currentRow.Cells["EMail"].Value == null ? String.Empty : currentRow.Cells["EMail"].Value.ToString(),
+                    currentRow.Cells["Username"] == null ? String.Empty : currentRow.Cells["Username"].Value.ToString(),
+                    currentRow.Cells["URL"].Value == null ? String.Empty : currentRow.Cells["URL"].Value.ToString(),
+                    currentRow.Cells["Password"] == null ? String.Empty : currentRow.Cells["Password"].Value.ToString()
                     );
             }
             catch (Exception ex)
