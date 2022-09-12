@@ -257,8 +257,8 @@
             // dataGridRecords
             // 
             this.dataGridRecords.AllowUserToAddRows = false;
-            this.dataGridRecords.AllowUserToDeleteRows = false;
             this.dataGridRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridRecords.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dataGridRecords.Location = new System.Drawing.Point(12, 27);
             this.dataGridRecords.MultiSelect = false;
             this.dataGridRecords.Name = "dataGridRecords";
@@ -266,7 +266,7 @@
             this.dataGridRecords.Size = new System.Drawing.Size(700, 512);
             this.dataGridRecords.TabIndex = 12;
             this.dataGridRecords.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRecords_CellValueChanged);
-            this.dataGridRecords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridRecords_KeyDown);
+            this.dataGridRecords.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridRecords_UserDeletingRow);
             // 
             // gbPasswordGenerator
             // 

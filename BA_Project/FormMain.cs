@@ -39,6 +39,8 @@ namespace BA_Project
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
+            dataGridRecords.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
             if (dataGridRecords.Rows.Count > 0)
                 dataGridRecords.Sort(dataGridRecords.Columns["RecordName"], System.ComponentModel.ListSortDirection.Ascending);
         }
@@ -104,27 +106,6 @@ namespace BA_Project
             FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
         }
 
-        private void dataGridRecords_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                var dgv = (sender as DataGridView);
-
-                if (e.KeyCode == Keys.Delete & dgv.SelectedCells.Count > 0)
-                {
-                    rm.Remove(dgv.Rows[dgv.SelectedCells[0].RowIndex].Tag as Record);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                FillDataGridView(dataGridRecords, rm.Get(r => r.User.ID == GenericFunctions.CurrentUser.ID & r.RecordName.ToLower().Contains(txtFilter.Text.ToLower())));
-            }
-        }
-
         private void dataGridRecords_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -186,6 +167,18 @@ namespace BA_Project
                 FormManager<FormLogin>.CreateForm().Show();
                 GenericFunctions.CurrentUser = null;
                 this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridRecords_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            try
+            {
+                rm.Remove(r => r.ID == (e.Row.Tag as Record).ID);
             }
             catch(Exception ex)
             {
