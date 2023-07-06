@@ -163,12 +163,12 @@ namespace BA_Project
             {
                 var smtpClient = new SmtpClient("smtp-mail.outlook.com", 587)
                 {
-                    Credentials = new NetworkCredential("keyvaulthelp@outlook.com", "V9PQcKKwla"),
+                    Credentials = new NetworkCredential("mail", "pass"),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     EnableSsl = true
                 };
 
-                smtpClient.Send("keyvaulthelp@outlook.com", mail, "KeyVault Account Recovery", $"Your account recovery code: {recoveryCode}");
+                smtpClient.Send("mail", mail, "KeyVault Account Recovery", $"Your account recovery code: {recoveryCode}");
             }
             catch (Exception ex)
             {
